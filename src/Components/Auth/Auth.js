@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+// StyleSheets
+import './Auth.css'
+
 // connect
 import {connect} from 'react-redux'
 
 // Action Builders
 import {INFO} from '../../redux/reducer'
+// import store from '../../redux/store'
 
 class Auth extends Component {
     constructor(){
@@ -25,7 +29,9 @@ class Auth extends Component {
             })
             .catch(error => {
                 console.log(error)
-            }) 
+            })
+        // store.dispatch({type: INFO, payload: {username, password}}) 
+        // console.log(store.getState())
     }
 
     login = () => {
@@ -37,6 +43,7 @@ class Auth extends Component {
             .catch(error => {
                 console.log(error)
             })
+        // store.dispatch({type: INFO, payload: {username, password}})
     }
 
     handleChange = (event) => {
@@ -47,23 +54,37 @@ class Auth extends Component {
 
     render() {
         return (
-            <div>
-                <input className='username-input'
-                    type='text'
-                    name='username' 
-                    placeholder='username'
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                />
-                <input className='password-input'
-                    type='password'
-                    name='password' 
-                    placeholder='password'
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                />
-                <button className='btn login' onClick={this.login} >Login</button>
-                <button className='btn register' onClick={this.register} >Register</button>
+            <div className='login-page'>
+                
+                <div className='box'>
+                    <h1 className='helo'>Helo</h1>
+                <div className='inputs'>
+                    <div>
+                        <label>Username:  </label>
+                        <input className='username-input'
+                            type='text'
+                            name='username' 
+                            placeholder='username'
+                            value={this.state.username}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <lavel>Password:  </lavel>
+                        <input className='password-input'
+                            type='password'
+                            name='password' 
+                            placeholder='password'
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </div>
+                    <div className='button'>
+                        <button className='btn login' onClick={this.login} >Login</button>
+                        <button className='btn register' onClick={this.register} >Register</button>
+                    </div>
+                </div>
             </div>
         )
     }

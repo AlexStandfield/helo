@@ -18,6 +18,9 @@ const register = async (req, res) => {
     const newUser = await db.register_user([username, passwordHash, profile_pic])
     // Remove Password
     delete newUser[0].password
+    // Session
+    req.session.user  = newUser[0]
+    // Send a Response
 }
 
 const login = async (req, res) => {
@@ -36,6 +39,7 @@ const login = async (req, res) => {
     if(authedPassword){
         // Remove Password
         delete foundUser[0].password
+        req.session.user = foundUser[0]
         res.status(200).send(accountInfo)
     }
     else {
@@ -43,7 +47,29 @@ const login = async (req, res) => {
     }
 }
 
+const getPosts =(req, res) => {
+    req.app.get('db').get_posts()
+        .then(posts => res.status(200).send(posts))
+        .catch(err => res.status(500).send(err))
+}
+
+const getPost = (req, res) => {
+
+}
+
+const post = (req, res) => {
+
+}
+
+const logout = (req, res) => {
+    req.session.destroy
+}
+
 module.exports = {
     register,
-    login
+    login,
+    getPosts,
+    getPost,
+    post,
+    logout
 }
