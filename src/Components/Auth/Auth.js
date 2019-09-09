@@ -70,7 +70,7 @@ class Auth extends Component {
                         />
                     </div>
                     <div>
-                        <lavel>Password:  </lavel>
+                        <label>Password:  </label>
                         <input className='password-input'
                             type='password'
                             name='password' 
